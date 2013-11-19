@@ -15,32 +15,46 @@ is re-raised.
 
 ## Usage
 
-Retry on *all* `StandardError`s.
-
 ```ruby
-begin
-  Insist.insist 3 do
-    API.make_request_that_may_fail
+class Example
+  include Insist
+
+  # Retry on all* exceptions. All means any exception inheriting from 
+  # StandardError, just like rescue.
+
+  def all_exceptions
+    insist 3 do
+      raise "Fail!"
+    end
+  rescue
+    puts "Rescued the exception after 3 tries."
   end
-rescue
-  puts "Even after three tries we failed!" 
+
+  # Retry only on certain exceptions (any exception other than TypeError won't)
+  # trigger a retry).
+
+  def some_exceptions
+  	insist 3, TypeError do
+      raise TypeError, "Fail!"
+  	end
+  rescue
+	puts "Even after three tries we failed!" 
+  end
+
+  # Sometimes you want to wait a little before retrying.
+
+  def wait_for_it
+    insist 3 do |try|
+      sleep 0.1 if try > 1
+
+      raise "Fail!"
+    end
+  end
 end
 ```
 
-Retry only on *certain* exceptions (`GoogleError` and `SocketError` in this 
-case).
-
-```ruby
-begin
-  Insist.insist 3, GoogleError, SocketError do
-    Google.make_request_that_may_fail
-  end
-rescue GoogleError, SocketError
-  puts "Even after three times we failed!"
-end
-```
-
-Note that `Insist` can be included too.
+`Insist` doesn't have to be included, `Insist.insist(3) { "hello" }` is valid 
+too.
 
 ## Installation
 

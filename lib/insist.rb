@@ -5,8 +5,19 @@ module Insist
   # exception was raised.
   #
   # tries      - An Integer (default: Float::Infinity).
-  # exceptions - A list of Exceptions (uses StandardError if no Exceptions are 
-  #              given).
+  # exceptions - A list of Exceptions (default: StandardError).
+  #
+  # Examples
+  # 
+  #   class Wrapper
+  #     include Insist
+  #     
+  #     def login(username, password)
+  #       insist(5, HTTPError) do
+  #         HTTP.post "..."
+  #       end
+  #     end
+  #   end 
   #
   # Returns the return value of the block.
   def insist(tries = Float::Infinity, *exceptions, &block)
