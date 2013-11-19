@@ -14,6 +14,9 @@ Gem::Specification.new do |s|
   s.license       = "MIT"
 
   s.files         = `git ls-files app lib`.split("\n")
+
+  s.cert_chain  = ['certs/britishtea.pem']
+  s.signing_key = File.expand_path("~/.gem/gem-private_key.pem") if $0 =~ /gem\z/
   
-  s.add_development_dependency "cutest", "~> 1.2.0"
+  s.add_development_dependency "cutest", "~> 1.2"
 end
