@@ -26,7 +26,7 @@ module Insist
     catch :__INSIST__ do
       tries.times do |i|
         begin
-          throw :__INSIST__, yield(i)
+          throw :__INSIST__, yield(i.succ)
         rescue *exceptions
           tries.pred == i ? raise : next
         end

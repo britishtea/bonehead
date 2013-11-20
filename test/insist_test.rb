@@ -33,6 +33,13 @@ test "returns the return value of the passed block" do |mod|
   assert_equal mod.insist(3) { "test" }, "test"
 end
 
+test "passes the current try as a block parameter" do |mod|
+  mod.insist(3) do |i| 
+    assert_equal i, $i += 1
+    raise "whatever" if $i < 3
+  end
+end
+
 CustomError = Class.new StandardError
 
 test "retries only when a given exception was raised" do |mod|
