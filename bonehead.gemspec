@@ -1,14 +1,14 @@
 # encoding: utf-8
 
 $:.unshift File.expand_path('../lib', __FILE__)
-require 'insist/version'
+require 'bonehead/version'
 
 Gem::Specification.new do |s|
-  s.name          = "insist"
-  s.version       = Insist::VERSION
+  s.name          = "bonehead"
+  s.version       = Bonehead::VERSION
   s.authors       = ["Jip van Reijsen"]
   s.email         = ["jipvanreijsen@gmail.com"]
-  s.homepage      = "https://github.com/britishtea/insist"
+  s.homepage      = "https://github.com/britishtea/bonehead"
   s.summary       = "Retry blocks of code when they raise an exception."
   s.description   = "Retry blocks of code when they raise an exception."
   s.license       = "MIT"

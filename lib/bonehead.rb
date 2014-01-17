@@ -1,4 +1,4 @@
-module Insist
+module Bonehead
   extend self
 
   # Public: Executes a block of code and retries it up to `tries` times if an
@@ -10,7 +10,7 @@ module Insist
   # Examples
   # 
   #   class Wrapper
-  #     include Insist
+  #     include Bonehead
   #     
   #     def login(username, password)
   #       insist(5, HTTPError) do
@@ -23,10 +23,10 @@ module Insist
   def insist(tries = Float::Infinity, *exceptions, &block)
     exceptions << StandardError if exceptions.empty?
 
-    catch :__INSIST__ do
+    catch :__BONEHEAD__ do
       tries.times do |i|
         begin
-          throw :__INSIST__, yield(i.succ)
+          throw :__BONEHEAD__, yield(i.succ)
         rescue *exceptions
           tries.pred == i ? raise : next
         end

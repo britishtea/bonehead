@@ -1,3 +1,3 @@
-module Insist
+module Bonehead
   VERSION = "0.0.1"
 end

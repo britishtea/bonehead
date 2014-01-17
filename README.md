@@ -1,4 +1,4 @@
-# Insist
+# Bonehead
 
 Retry blocks of code when they raise an exception.
 
@@ -8,7 +8,7 @@ Retry blocks of code when they raise an exception.
 def insist(tries = Float::Infinity, *exceptions, &block)
 ```
 
-Insist lets you execute a block of code. If no exception was raised it returns
+Bonehead lets you execute a block of code. If no exception was raised it returns
 the return value of the block. If an exception was raised, it executes the block
 again. If after `tries` times the block still raises an exception, the exception
 is re-raised.
@@ -17,7 +17,7 @@ is re-raised.
 
 ```ruby
 class Example
-  include Insist
+  include Bonehead
 
   # Retry on all* exceptions. All means any exception inheriting from 
   # StandardError, just like rescue.
@@ -38,7 +38,7 @@ class Example
       raise TypeError, "Fail!"
   	end
   rescue
-	puts "Even after three tries we failed!" 
+	  puts "Even after three tries we failed!" 
   end
 
   # Sometimes you want to wait a little before retrying.
@@ -53,12 +53,12 @@ class Example
 end
 ```
 
-`Insist` doesn't have to be included, `Insist.insist(3) { "hello" }` is valid 
-too.
+`Bonehead` doesn't have to be included, `Bonehead.insist(3) { "hello" }` is 
+valid too.
 
 ## Installation
 
-`gem install insist`
+`gem install bonehead`
 
 ## License
 

@@ -1,7 +1,7 @@
-require_relative "../lib/insist"
+require_relative "../lib/bonehead"
 
 prepare { $i = 0 }
-setup { Insist }
+setup { Bonehead }
 
 test "retries when an exception was raised" do |mod|
   mod.insist(3) do
