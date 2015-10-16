@@ -1,4 +1,5 @@
-require_relative "../lib/bonehead"
+require "bonehead"
+require "cutest"
 
 prepare { $i = 0 }
 setup { Bonehead }
@@ -40,11 +41,11 @@ test "passes the current try as a block parameter" do |mod|
   end
 end
 
-CustomError = Class.new StandardError
-
 test "retries only when a given exception was raised" do |mod|
+  custom_error = Class.new StandardError
+
   assert_raise(StandardError) do
-    mod.insist(3, CustomError) do
+    mod.insist(3, custom_error) do
       $i = $i + 1
       raise StandardError, "an exception"
     end
@@ -54,10 +55,12 @@ test "retries only when a given exception was raised" do |mod|
 end
 
 test "doesn't retry when a non-given exception was raised" do |mod|
-  assert_raise(CustomError) do
-    mod.insist(3, CustomError) do
+  custom_error = Class.new StandardError
+
+  assert_raise(custom_error) do
+    mod.insist(3, custom_error) do
       $i = $i + 1
-      raise CustomError, "an exception"
+      raise custom_error, "an exception"
     end
   end
 
