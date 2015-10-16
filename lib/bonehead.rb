@@ -1,25 +1,25 @@
+# Public: Executes a block of code and retries it up to `tries` times if an
+# exception was raised.
+#
+# tries      - An Integer (default: Float::Infinity).
+# exceptions - A list of Exceptions (default: StandardError).
+#
+# Examples
+# 
+#   class Wrapper
+#     include Bonehead
+#     
+#     def login(username, password)
+#       insist(5, HTTPError) do
+#         HTTP.post "..."
+#       end
+#     end
+#   end 
+#
+# Returns the return value of the block.
 module Bonehead
   extend self
 
-  # Public: Executes a block of code and retries it up to `tries` times if an
-  # exception was raised.
-  #
-  # tries      - An Integer (default: Float::Infinity).
-  # exceptions - A list of Exceptions (default: StandardError).
-  #
-  # Examples
-  # 
-  #   class Wrapper
-  #     include Bonehead
-  #     
-  #     def login(username, password)
-  #       insist(5, HTTPError) do
-  #         HTTP.post "..."
-  #       end
-  #     end
-  #   end 
-  #
-  # Returns the return value of the block.
   def insist(tries = Float::Infinity, *exceptions, &block)
     exceptions << StandardError if exceptions.empty?
 
