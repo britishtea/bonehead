@@ -56,8 +56,6 @@ end
 Tests use [cutest][cutest]. Install Bonehead with development dependencies 
 (`gem install cutest --development`) and run `make test`.
 
-The tests can be run with the following command: `cutest test/*_test.rb`.
-
 [cutest]: https://github.com/djanowski/cutest
 
 ## License
